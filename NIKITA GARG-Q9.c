@@ -1,9 +1,8 @@
 #include<stdio.h>
 #include<conio.h>
-#define max 30
 void main()
 {
-  int i,j,n,t,p[max],bt[max],wt[max],tat[max];
+  int i,j,n,t,p[30],bt[30],wt[30],tat[30];
   //p = process id
   //bt = burst time
   //wt = waiting time
@@ -13,7 +12,7 @@ void main()
   //atat = average turn around time
   int c=0;
   
-	//burst time taken from user and stored in file
+	
 	printf("Enter the number of processes : ");
     scanf("%d",&n); 
 	printf("Enter process ID for each process : ");
@@ -21,10 +20,8 @@ void main()
   	{
     	scanf("%d",&p[i]);
   	} 
-  	FILE *fp;
-	fp=fopen("CPU_BURST.txt","w");
-	if(fp==NULL)
-	printf("\n File not found");
+  	//burst time taken from user and stored in file
+  	
 	again:
 	printf("\nEnter burst time : ");
 	for(i=0;i<n;i++)
@@ -34,9 +31,16 @@ void main()
   	for(i=0;i<n;i++)
   	{
   		if(bt[i]<=0)
-  		goto again;
+  		{
+  			printf("The burst time entered should be positive integer value");
+  			goto again;
+		}
+  		
   	}
-  	
+  	FILE *fp;
+	fp=fopen("CPU_BURST.txt","w");
+	if(fp==NULL)
+	printf("\n File not found");
 	for(i=0;i<n;i++)
 	fprintf(fp,"\t %d",bt[i]);
 	fclose(fp);
